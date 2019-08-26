@@ -3,14 +3,16 @@
 
 All aspects of the fan and option light kit can be controlled.
 
+The REST API of the fan is unpublished.  It was mapped out using a packet capture and interactions with their app.  Since the manufacturer was unwilling to publish the API it is subject to change and break at any time.
+
 ## Invocation
 Import into your code and create a `ModernFormsFan` object
 
 ```python
 from modernforms import moderforms_fan
-fan = moderforms_fan.ModerFormsFan('192.168.1.10', 5)
+fan = moderforms_fan.ModernFormsFan('192.168.1.10', 5)
 ```
-Constructor take 2 arguments.  The IP or hostnane (if you DNS registered your fan) and the timeout for communicating with the fan.
+Constructor take 2 arguments.  The IP or hostname (if you DNS registered your fan) and the timeout for communicating with the fan.
 
 The timeout is optional and has a default value of 5.
 
@@ -23,7 +25,7 @@ The fan has 3 attributes to control:
 >>> fan.fan_on
 False
 >>> fan.fan_on = True
->>> fan,fan_on 
+>>> fan,fan_on
 True
 ```
 
@@ -34,9 +36,9 @@ The light kit has two attributes to control:
 ```python
 >>> fan.light_on
 False
->>> fan.lingt_on = True
->>> fan,light_on 
+>>> fan.light_on = True
+>>> fan,light_on
 True
 ```
 
-**This interface does not perform any error handling.  No `exception` are caught so they can be passed up the calling stack and handled in code that implements this interface.**  You should consider wrapping your calls to this interface in `try` `catch` blocks.
+**This interface does not perform any error handling.  No `exception` is caught so it can be passed up the calling stack and handled in code that implements this interface.**  You should consider wrapping your calls to this interface in `try` blocks.
