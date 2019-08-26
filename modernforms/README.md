@@ -12,7 +12,7 @@ Import into your code and create a `ModernFormsFan` object
 from modernforms import moderforms_fan
 fan = moderforms_fan.ModernFormsFan('192.168.1.10', 5)
 ```
-Constructor take 2 arguments.  The IP or hostname (if you DNS registered your fan) and the timeout for communicating with the fan.
+Constructor takes 2 arguments.  The IP or hostname (if you DNS registered your fan) and the timeout for communicating with the fan.
 
 The timeout is optional and has a default value of 5.
 
@@ -25,7 +25,7 @@ The fan has 3 attributes to control:
 >>> fan.fan_on
 False
 >>> fan.fan_on = True
->>> fan,fan_on
+>>> fan.fan_on
 True
 ```
 
@@ -37,7 +37,7 @@ The light kit has two attributes to control:
 >>> fan.light_on
 False
 >>> fan.light_on = True
->>> fan,light_on
+>>> fan.light_on
 True
 ```
 
