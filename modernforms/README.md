@@ -40,5 +40,3 @@ False
 >>> fan.light_on
 True
 ```
-
-**This interface does not perform any error handling.  No `exception` is caught so it can be passed up the calling stack and handled in code that implements this interface.**  You should consider wrapping your calls to this interface in `try` blocks.
