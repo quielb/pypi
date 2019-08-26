@@ -2,7 +2,7 @@
 import requests
 from . import exceptions
 
-DEFAULT_TIMEOUT = 1
+DEFAULT_TIMEOUT = 5
 DEFAULT_HEADERS = {"Content-Type": "application/json"}
 
 
