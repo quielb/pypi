@@ -27,5 +27,5 @@ setup(
     ],
     packages=setuptools.find_packages(),
     include_package_data=False,
-    install_requires=["requests","json","re"],
+    install_requires=["requests"],
 )
