@@ -1,4 +1,4 @@
-"""Modern Forms Exceptions.
+""" Airscape Fan Exceptions.
 
 These are exceptions that are throw as a result 
 of a caught exception from the requests class.
@@ -7,7 +7,7 @@ from the requests class.
 """
 
 
-class ModernFormsException(IOError):
+class AirscapeException(IOError):
     """There was an ambiguous exception that occurred while handling your
     request.
     """
@@ -23,8 +23,8 @@ class ModernFormsException(IOError):
         super(ModernFormsException, self).__init__(*args, **kwargs)
 
 
-class ConnectionError(ModernFormsException):
+class ConnectionError(AirscapeException):
     """A Connection error occurred."""
 
-class Timeout(ModernFormsException):
+class Timeout(AirscapeException):
     """The request timed out."""
