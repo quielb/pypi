@@ -20,7 +20,7 @@ class AirscapeException(IOError):
         if (response is not None and not self.request and
                 hasattr(response, 'request')):
             self.request = self.response.request
-        super(ModernFormsException, self).__init__(*args, **kwargs)
+        super(AirscapeException, self).__init__(*args, **kwargs)
 
 
 class ConnectionError(AirscapeException):
@@ -28,3 +28,6 @@ class ConnectionError(AirscapeException):
 
 class Timeout(AirscapeException):
     """The request timed out."""
+
+class JSONDecoderError(AirscapeException):
+    """An error in the JSON return"""

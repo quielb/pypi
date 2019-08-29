@@ -1,5 +1,5 @@
 """Module for Controlling AirScape Whole House Fans."""
-__version__ = "0.1.4"
+__version__ = "0.1.5"
 
 import re
 import json
@@ -111,8 +111,12 @@ class Fan:
             # There is a line in the text that has some control characters
             # Those break converting JSON.  Clean it out then JSON->DICT
             clean_text = re.sub(r".*server_response.*", "", api.text)
-            self._data = json.loads(clean_text)
-            return self._data
+            try:
+                self._data = json.loads(clean_text)
+            except json.decoder.JSONDecodeError:
+                raise ex.JSONDecoderError from json.decoder.JSONDecodeError
+            else:
+                return self._data
 
     def set_device_state(self, cmd) -> None:
         """Set state of fan.
