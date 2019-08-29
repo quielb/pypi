@@ -1,5 +1,5 @@
 """Module for Controlling AirScape Whole House Fans."""
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 
 import re
 import json
