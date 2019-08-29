@@ -9,8 +9,8 @@ The REST API of the fan is unpublished.  It was mapped out using a packet captur
 Import into your code and create a `ModernFormsFan` object
 
 ```python
-from modernforms import moderforms_fan
-fan = moderforms_fan.ModernFormsFan('192.168.1.10', 5)
+import modernforms
+fan = moderforms.ModernFormsFan('192.168.1.10', 5)
 ```
 Constructor takes 2 arguments.  The IP or hostname (if you DNS registered your fan) and the timeout for communicating with the fan.
 
