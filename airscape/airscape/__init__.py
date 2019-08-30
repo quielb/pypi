@@ -110,13 +110,14 @@ class Fan:
         else:
             # There is a line in the text that has some control characters
             # Those break converting JSON.  Clean it out then JSON->DICT
-            clean_text = re.sub(r".*server_response.*", "", api.text)
-            try:
-                self._data = json.loads(clean_text)
-            except json.decoder.JSONDecodeError:
-                raise ex.JSONDecoderError from json.decoder.JSONDecodeError
-            else:
-                return self._data
+            clean_list = re.findall(
+                r"(?!\s+.*server_response\".*$)^\s+\"\w+.*",
+                api.text,
+                re.M
+            )
+            clean_text = "{ " + "\n".join(clean_list) + " }"
+            self._data = json.loads(clean_text)
+            return self._data
 
     def set_device_state(self, cmd) -> None:
         """Set state of fan.
