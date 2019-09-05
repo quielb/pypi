@@ -79,7 +79,7 @@ class Fan:
         if speed < self._data["fanspd"]:
             command = 3
 
-        while self._data["fanspd"] != speed:
+        while self._data["fanspd"] != speed and self._data["fanspd"] != 0:
             self.set_device_state(command)
             # Need a delay to wait for fan to process command
             # an increase of 1 isn't an issue.  But several rapid calls
