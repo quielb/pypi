@@ -1,10 +1,32 @@
 """Module for Controlling ModernForms Fans with option light kit."""
 import requests
 from . import exceptions
+from datetime import date, datetime
 
 DEFAULT_TIMEOUT = 5
 DEFAULT_HEADERS = {"Content-Type": "application/json"}
 
+Y = 2000 # dummy leap year to allow input X-02-29 (leap day)
+seasons = [('winter', (date(Y,  1,  1),  date(Y,  3, 20))),
+        ('spring', (date(Y,  3, 21),  date(Y,  6, 20))),
+        ('summer', (date(Y,  6, 21),  date(Y,  9, 22))),
+        ('autumn', (date(Y,  9, 23),  date(Y, 12, 20))),
+        ('winter', (date(Y, 12, 21),  date(Y, 12, 31)))]
+
+def get_season():
+    """ Gets current season """
+    now = date.today()
+    if isinstance(now, datetime):
+        now = now.date()
+    now = now.replace(year=Y)
+    return next(season for season, (start, end) in seasons if start <= now <= end)
+
+fanSeasonDirections = { 'winter' : 'reverse', 
+                        'summer' : 'forward', 
+                        'autumn' : 'reverse', 
+                        'spring' : 'forward'}
+currentSeason = get_season()
+seasonDirection = fanSeasonDirections[currentSeason]
 
 class ModernFormsFan:
     """Class representing a fan.
@@ -36,6 +58,11 @@ class ModernFormsFan:
         True on. False off.
         API ignores invalid values
         """
+        self.set_device_state({"lightOn": state})
+
+    def toggleLight(self):
+        """ Toggles light state. """
+        state = not self._data['lightOn']
         self.set_device_state({"lightOn": state})
 
     @property
@@ -71,6 +98,17 @@ class ModernFormsFan:
         API ignores invalid values
         """
         self.set_device_state({"fanOn": state})
+
+    def toggleFan(self, direction: bool = seasonDirection):
+        """ Toggles the fan state. 
+        
+        Also automatically detects which season it is and spins the fan in the corresponding direction for that season.
+        This can be overriden by setting the direction paramter to something else.
+        """
+        
+        state = not self._data['fanOn']
+        self.set_device_state({"fanOn": state})
+        self.set_device_state({"fanDirection": direction})
 
     @property
     def fan_speed(self) -> int:
