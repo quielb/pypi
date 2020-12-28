@@ -107,8 +107,7 @@ class ModernFormsFan:
         """
         
         state = not self._data['fanOn']
-        self.set_device_state({"fanOn": state})
-        self.set_device_state({"fanDirection": direction})
+        self.set_device_state({"fanDirection": direction, "fanOn": state})
 
     @property
     def fan_speed(self) -> int:
