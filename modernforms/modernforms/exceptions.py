@@ -14,17 +14,17 @@ class ModernFormsException(IOError):
 
     def __init__(self, *args, **kwargs):
         """Initialize ModernFormsException with `request` and `response` objects."""
-        response = kwargs.pop('response', None)
+        response = kwargs.pop("response", None)
         self.response = response
-        self.request = kwargs.pop('request', None)
-        if (response is not None and not self.request and
-                hasattr(response, 'request')):
+        self.request = kwargs.pop("request", None)
+        if response is not None and not self.request and hasattr(response, "request"):
             self.request = self.response.request
         super(ModernFormsException, self).__init__(*args, **kwargs)
 
 
 class ConnectionError(ModernFormsException):
     """A Connection error occurred."""
+
 
 class Timeout(ModernFormsException):
     """The request timed out."""
